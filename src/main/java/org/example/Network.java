@@ -18,7 +18,7 @@ public class Network {
     public Network(int[] neuronNumbers, double teachAlpha) {
         layers = new Layer[neuronNumbers.length + 1];
         for (int i = 0; i < neuronNumbers.length; i++) {
-            int previousNeuronNumbers = i == 0? imageSize: neuronNumbers[i - 1];
+            int previousNeuronNumbers = i == 0 ? imageSize : neuronNumbers[i - 1];
             layers[i] = new Layer(neuronNumbers[i], previousNeuronNumbers);
         }
         layers[neuronNumbers.length] = new Layer(3, neuronNumbers[neuronNumbers.length - 1]);
@@ -32,18 +32,18 @@ public class Network {
             if (i == 0) {
                 output = layers[i].getOutputs(inputs);
             } else {
-                output = layers[i].getOutputs(neuronInputs.get(i-1));
+                output = layers[i].getOutputs(neuronInputs.get(i - 1));
             }
             neuronInputs.put(i, output);
         }
-        return neuronInputs.get(layers.length-1);
+        return neuronInputs.get(layers.length - 1);
     }
 
     public double[] runImage(String imagePath) throws IOException {
         inputs = new double[49];
         BufferedImage image = ImageIO.read(new File(imagePath));
 
-        for( int i = 0; i < 7; i++)
+        for (int i = 0; i < 7; i++)
             for (int j = 0; j < 7; j++) {
                 int color = image.getRGB(i, j);
                 inputs[i * 7 + j] = Math.abs(((color & 0xff00) >> 8) - 255) * 1.0 / 255;
@@ -55,7 +55,7 @@ public class Network {
     public double[] runArray(double[] trainData) {
         inputs = new double[49];
 
-        for( int i = 0; i < 7; i++)
+        for (int i = 0; i < 7; i++)
             for (int j = 0; j < 7; j++) {
                 inputs[i * 7 + j] = trainData[i * 7 + j];
             }
@@ -81,7 +81,7 @@ public class Network {
                 layers[i].backPropagation(layers[i + 1], layers[i - 1].getResults(), teachAlpha);
             }
         }
-        for (Layer layer: layers) {
+        for (Layer layer : layers) {
             layer.addDeltaWeight();
         }
     }

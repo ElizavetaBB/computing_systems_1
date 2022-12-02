@@ -4,6 +4,7 @@ public class Neuron {
     private double[] weights;
     private double output;
     private double[] deltaWeights;
+
     public Neuron(double weights[]) {
         this.weights = new double[weights.length];
         for (int i = 0; i < weights.length; i++) {
@@ -33,7 +34,7 @@ public class Neuron {
         for (int i = 0; i < x.length; i++) {
             sum += x[i] * weights[i];
         }
-        output = 1.0/(1+Math.exp(-sum));
+        output = 1.0 / (1 + Math.exp(-sum));
         return output;
     }
 }

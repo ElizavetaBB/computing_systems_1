@@ -5,6 +5,7 @@ public class Layer {
     private double[] outputs;
 
     private double[] backPropagationDelta;
+
     public Layer(int neuronNumbers, int previousNeuronNumbers) {
         neurons = new Neuron[neuronNumbers];
         for (int i = 0; i < neuronNumbers; i++) {
@@ -69,7 +70,7 @@ public class Layer {
     }
 
     public void addDeltaWeight() {
-        for (Neuron neuron: neurons) {
+        for (Neuron neuron : neurons) {
             neuron.addDeltaWeight();
         }
     }
